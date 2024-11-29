@@ -1,9 +1,8 @@
-package pl.p_a_w.biblioteka.Autorzy;
+package pl.p_a_w.biblioteka.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import pl.p_a_w.biblioteka.Ksiazki.Ksiazki;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -11,6 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "Autorzy", schema = "sql7747662")
 public class Autorzy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,12 +1,9 @@
-package pl.p_a_w.biblioteka.Ksiazki;
+package pl.p_a_w.biblioteka.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-import pl.p_a_w.biblioteka.Autorzy.Autorzy;
-import pl.p_a_w.biblioteka.Kategorie.Kategorie;
-import pl.p_a_w.biblioteka.Wypozyczenia.Wypozyczenia;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -14,6 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "Ksiazki", schema = "sql7747662")
 public class Ksiazki {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

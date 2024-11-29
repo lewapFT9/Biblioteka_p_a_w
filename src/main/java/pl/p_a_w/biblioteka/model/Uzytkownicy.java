@@ -1,17 +1,20 @@
-package pl.p_a_w.biblioteka.Uzytkownicy;
+package pl.p_a_w.biblioteka.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
-import pl.p_a_w.biblioteka.Wypozyczenia.Wypozyczenia;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "Uzytkownicy", schema = "sql7747662")
 public class Uzytkownicy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +34,11 @@ public class Uzytkownicy {
     private String email;
 
     @ColumnDefault("'USER'")
-    @Column(name = "Rola", nullable = false, length = 10)
+    @Column(name = "Rola", length = 10)
     private String rola;
+
+    @Column(name = "Haslo", nullable = false, length = 100)
+    private String haslo;
 
     @OneToMany(mappedBy = "idUzytkownika")
     private Set<Wypozyczenia> wypozyczenias = new LinkedHashSet<>();

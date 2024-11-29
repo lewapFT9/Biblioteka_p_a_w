@@ -1,16 +1,15 @@
-package pl.p_a_w.biblioteka.Wypozyczenia;
+package pl.p_a_w.biblioteka.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import pl.p_a_w.biblioteka.Ksiazki.Ksiazki;
-import pl.p_a_w.biblioteka.Uzytkownicy.Uzytkownicy;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "Wypozyczenia", schema = "sql7747662")
 public class Wypozyczenia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
