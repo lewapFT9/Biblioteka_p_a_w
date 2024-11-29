@@ -38,11 +38,31 @@ public class SecConfig {
 //
 //        return http.build();
 //    }
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth.requestMatchers("/", "/register")
-                        .permitAll().anyRequest().authenticated())
-                .httpBasic(withDefaults()).csrf(AbstractHttpConfigurer::disable);
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http.authorizeHttpRequests(auth -> auth.requestMatchers("/", "/register")
+//                        .permitAll().anyRequest().authenticated())
+//                .httpBasic(withDefaults()).formLogin(withDefaults()).csrf(AbstractHttpConfigurer::disable);
+//    return http.build();
+//}
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/login", "/register").permitAll() // publiczne zasoby
+                    .anyRequest().authenticated() // każda inna ścieżka wymaga uwierzytelnienia
+            ).httpBasic(withDefaults()).csrf(AbstractHttpConfigurer::disable)
+            .formLogin(form -> form
+                    .loginPage("/login") // strona z formularzem logowania
+                    .defaultSuccessUrl("/", true) // strona przekierowania po zalogowaniu
+                    .permitAll()
+            )
+            .logout(logout -> logout
+                    .logoutUrl("/logout") // URL wylogowania
+                    .logoutSuccessUrl("/login?logout") // przekierowanie po wylogowaniu
+                    .permitAll()
+            );
+
     return http.build();
 }
 

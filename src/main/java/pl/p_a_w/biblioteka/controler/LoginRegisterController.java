@@ -3,9 +3,7 @@ package pl.p_a_w.biblioteka.controler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.p_a_w.biblioteka.model.Uzytkownicy;
 import pl.p_a_w.biblioteka.repo.UzytkownikRepo;
 
@@ -16,6 +14,11 @@ public class LoginRegisterController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UzytkownikRepo uRepo;
+
+    @GetMapping(path = "/login")
+    public String login() {
+        return "login"; // zwraca widok "login.html"
+    }
 
    @PostMapping(path = "/register")
     public ResponseEntity<Object> RegisterUser(@RequestBody Uzytkownicy uzytkownik) {
