@@ -14,6 +14,7 @@ public class DaneUzytkownika implements UserDetails {
     private Uzytkownicy uzytkownik;
     private List<GrantedAuthority> role;
 
+
     public DaneUzytkownika(Uzytkownicy uzytkownik) {
         this.uzytkownik = uzytkownik;
         role = Arrays.stream(uzytkownik.getRola().split(","))
