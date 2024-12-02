@@ -1,5 +1,6 @@
 package pl.p_a_w.biblioteka.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,12 +17,14 @@ public class Wypozyczenia {
     @Column(name = "Id_wypozyczenia", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Id_uzytkownika")
+    @JsonBackReference
     private Uzytkownicy idUzytkownika;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Id_ksiazki")
+    @JsonBackReference
     private Ksiazki idKsiazki;
 
     @Column(name = "Data_wypozyczenia", nullable = false)

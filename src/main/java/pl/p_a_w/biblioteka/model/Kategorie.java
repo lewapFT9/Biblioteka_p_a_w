@@ -1,5 +1,7 @@
 package pl.p_a_w.biblioteka.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +23,7 @@ public class Kategorie {
     private String nazwa;
 
     @OneToMany(mappedBy = "idKategorii")
+    @JsonIgnore
     private Set<Ksiazki> ksiazkis = new LinkedHashSet<>();
 
 }

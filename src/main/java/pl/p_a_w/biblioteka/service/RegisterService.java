@@ -13,13 +13,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pl.p_a_w.biblioteka.model.Uzytkownicy;
-import pl.p_a_w.biblioteka.repo.UzytkownikRepo;
+import pl.p_a_w.biblioteka.repo.UserRepo;
 
 @Service
 public class RegisterService {
 
     @Autowired
-    private UzytkownikRepo uRepo;
+    private UserRepo uRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -41,7 +41,7 @@ public class RegisterService {
     public ResponseEntity<String> register(Uzytkownicy uzytkownik) {
         try {
             uzytkownik.setHaslo(passwordEncoder.encode(uzytkownik.getHaslo()));
-            uzytkownik.setRola("USER");
+            uzytkownik.setRola("ADMIN");
             uRepo.save(uzytkownik);
             if (uzytkownik.getId() > 0) {
                 return ResponseEntity.status(200).body("Successfully registered!");

@@ -1,5 +1,8 @@
 package pl.p_a_w.biblioteka.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +29,12 @@ public class Ksiazki {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Id_autora")
+    @JsonBackReference
     private Autorzy idAutora;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Id_kategorii")
+    @JsonBackReference
     private Kategorie idKategorii;
 
     @ColumnDefault("1")
@@ -37,6 +42,7 @@ public class Ksiazki {
     private Integer iloscEgzemplarzy;
 
     @OneToMany(mappedBy = "idKsiazki")
+    @JsonIgnore
     private Set<Wypozyczenia> wypozyczenias = new LinkedHashSet<>();
 
 }

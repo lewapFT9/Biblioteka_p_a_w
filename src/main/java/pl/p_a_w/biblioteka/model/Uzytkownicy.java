@@ -1,5 +1,7 @@
 package pl.p_a_w.biblioteka.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,6 +43,7 @@ public class Uzytkownicy {
     private String haslo;
 
     @OneToMany(mappedBy = "idUzytkownika")
+    @JsonIgnore
     private Set<Wypozyczenia> wypozyczenias = new LinkedHashSet<>();
 
 }
