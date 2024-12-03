@@ -14,4 +14,9 @@ import java.util.Optional;
 public interface BooksRepo extends JpaRepository<Books, Integer> {
     @Query(value = "select * from books where id_category = ?1", nativeQuery = true)
     Optional<List<Books>> findAllByCategory(int category);
+
+    @Query(value = "select * from books where id_author = ?1", nativeQuery = true)
+    List<Books> findByAuthor(int author_id);
+
+
 }

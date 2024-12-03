@@ -3,10 +3,10 @@ package pl.p_a_w.biblioteka.controler;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.p_a_w.biblioteka.service.BooksService;
+
+import java.util.Map;
 
 @RestController
 public class BooksController {
@@ -27,4 +27,16 @@ public class BooksController {
     public ResponseEntity<Object> book(@PathVariable Integer id) {
         return booksService.getBook(id);
     }
+
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @PostMapping("books/byauthor")
+    public ResponseEntity<Object> booksByAuthor(@RequestBody Map<String, String> author) {
+        String getAuthor = author.get("author");
+        return booksService.getBooksByAuthor(getAuthor);
+    }
+
 }
+
+
+
+
