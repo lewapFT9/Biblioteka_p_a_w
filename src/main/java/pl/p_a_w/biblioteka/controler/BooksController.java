@@ -6,10 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import pl.p_a_w.biblioteka.model.Ksiazki;
 import pl.p_a_w.biblioteka.service.BooksService;
-
-import java.util.List;
 
 @RestController
 public class BooksController {
@@ -19,13 +16,13 @@ public class BooksController {
         this.booksService = booksService;
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/books")
     public ResponseEntity<Object> books() {
         return booksService.getBooks();
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("books/{id}")
     public ResponseEntity<Object> book(@PathVariable Integer id) {
         return booksService.getBook(id);

@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 
 public class DaneUzytkownika implements UserDetails {
 
-    private Uzytkownicy uzytkownik;
+    private Users uzytkownik;
     private List<GrantedAuthority> role;
 
 
-    public DaneUzytkownika(Uzytkownicy uzytkownik) {
+    public DaneUzytkownika(Users uzytkownik) {
         this.uzytkownik = uzytkownik;
-        role = Arrays.stream(uzytkownik.getRola().split(","))
+        role = Arrays.stream(uzytkownik.getRole().split(","))
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
@@ -28,7 +28,7 @@ public class DaneUzytkownika implements UserDetails {
 
     @Override
     public String getPassword() {
-        return uzytkownik.getHaslo();
+        return uzytkownik.getPassword();
     }
 
     @Override

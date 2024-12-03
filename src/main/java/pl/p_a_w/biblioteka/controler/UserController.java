@@ -15,8 +15,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-
+    
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Object> getUsers() {
