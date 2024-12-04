@@ -8,22 +8,24 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+
+
 public class BookDTO {
     private int id;
-    private String tytul;
-    private String autor;
-    private String kategoria;
-    private Integer rokWydania;
-    private int iloscEgzeplazy;
+    private String title;
+    private String author;
+    private String category;
+    private int yearOfRelease;
+    private int numberOfCopies;
 
-    public BookDTO(Integer id, String tytul, String autor, String kategoria, Integer rokWydania, Integer iloscEgzeplazy) {
+
+    public BookDTO(int id, String title, String author, String category, int yearOfRelease, int numberOfCopies) {
         this.id = id;
-        this.tytul = tytul;
-        this.autor = autor;
-        this.kategoria = kategoria;
-        this.rokWydania = rokWydania;
-        this.iloscEgzeplazy = iloscEgzeplazy;
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.yearOfRelease = yearOfRelease;
+        this.numberOfCopies = numberOfCopies;
     }
-
 
 }

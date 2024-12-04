@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.p_a_w.biblioteka.dto.BookDTO;
 import pl.p_a_w.biblioteka.model.Books;
+import pl.p_a_w.biblioteka.model.Categories;
 import pl.p_a_w.biblioteka.repo.BooksRepo;
 import pl.p_a_w.biblioteka.repo.CategoryRepo;
 
@@ -40,5 +41,15 @@ public class CategoryService {
             return ResponseEntity.ok(books);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    public ResponseEntity<Categories> returnCategoryToAddBook(String categoryName) {
+        if(categoryRepo.findByName(categoryName).isPresent()){
+            return ResponseEntity.ok(categoryRepo.findByName(categoryName).get());
+        }
+        Categories category = new Categories();
+        category.setName(categoryName);
+        categoryRepo.save(category);
+        return ResponseEntity.ok(category);
     }
 }

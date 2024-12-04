@@ -1,17 +1,20 @@
 package pl.p_a_w.biblioteka.service;
 
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.p_a_w.biblioteka.dto.BookDTO;
+import pl.p_a_w.biblioteka.dto.BookDTO2;
+import pl.p_a_w.biblioteka.model.Authors;
 import pl.p_a_w.biblioteka.model.Books;
 import pl.p_a_w.biblioteka.repo.AuthorRepo;
 import pl.p_a_w.biblioteka.repo.BooksRepo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 public class BooksService {
@@ -22,11 +25,14 @@ public class BooksService {
     AuthorRepo authorRepo;
     final
     AuthorService authorService;
+    final
+    CategoryService categoryService;
 
-    public BooksService(BooksRepo booksRepo, AuthorRepo authorRepo, AuthorService authorService) {
+    public BooksService(BooksRepo booksRepo, AuthorRepo authorRepo, AuthorService authorService, CategoryService categoryService) {
         this.booksRepo = booksRepo;
         this.authorRepo = authorRepo;
         this.authorService = authorService;
+        this.categoryService = categoryService;
     }
     public ResponseEntity<Object> getBooks() {
         return ResponseEntity.ok(booksRepo.findAll());
@@ -57,6 +63,18 @@ public class BooksService {
             return ResponseEntity.ok(books);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    public ResponseEntity<Books> addBook(@Valid BookDTO2 dto) {
+        BookDTO2 bookDTO =new BookDTO2(dto.getTitle(),dto.getCategory(),
+                dto.getYearOfRelease(), dto.getNumberOfCopies(), dto.getAuthorName(), dto.getAuthorSurname());
+        Books book = new Books();
+        book.setTitle(bookDTO.getTitle());
+        book.setReleaseYear(bookDTO.getYearOfRelease());
+        book.setNumberOfCopies(bookDTO.getNumberOfCopies());
+        book.setIdAuthor(authorService.returnAuthorToAddBook(bookDTO.getAuthorName(), bookDTO.getAuthorSurname()).getBody());
+        book.setIdCategory(categoryService.returnCategoryToAddBook(bookDTO.getCategory()).getBody());
+        return ResponseEntity.ok(booksRepo.save(book));
     }
 
 

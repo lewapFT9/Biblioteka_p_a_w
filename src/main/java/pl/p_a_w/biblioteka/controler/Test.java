@@ -16,10 +16,10 @@ public class Test {
     }
 
 //    @PreAuthorize("hasAuthority('USER')")
-//    @GetMapping("/")
-//    public List<Users> home() {
-//        return userRepo.findAll();
-//    }
+@GetMapping("/test")
+public List<Users> home() {
+    return userRepo.findAll();
+}
 
 //    //@PreAuthorize("hasAuthority('USER')")
 //    @GetMapping("/test")

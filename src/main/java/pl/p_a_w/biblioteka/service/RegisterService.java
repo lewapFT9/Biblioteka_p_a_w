@@ -44,8 +44,8 @@ public class RegisterService {
         try {
             uzytkownik.setPassword(passwordEncoder.encode(uzytkownik.getPassword()));
             uzytkownik.setRole("USER");
-            uRepo.save(uzytkownik);
             if (uzytkownik.getId() > 0) {
+                uRepo.save(uzytkownik);
                 return ResponseEntity.status(200).body("Successfully registered!");
             }
         } catch (DataIntegrityViolationException e) {

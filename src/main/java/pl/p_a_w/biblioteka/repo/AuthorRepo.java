@@ -14,4 +14,8 @@ public interface AuthorRepo extends JpaRepository<Authors, Integer> {
 
     @Query(value = "select author_id from authors where (lower(name) like lower(?1)) or (lower(surname) like lower(?1))", nativeQuery = true)
     Optional<List<Integer>> findByFirstName(String firstName);
+
+
+    @Query(value = "select * from authors where lower(name) = lower(?1) and lower(surname) = lower(?2)", nativeQuery = true)
+    Optional<Authors> findByNameAndSurname(String name, String surname);
 }
