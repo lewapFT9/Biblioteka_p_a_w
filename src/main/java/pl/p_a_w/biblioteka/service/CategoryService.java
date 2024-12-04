@@ -1,6 +1,7 @@
 package pl.p_a_w.biblioteka.service;
 
 
+import jdk.jfr.Category;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,38 @@ public class CategoryService {
         category.setName(categoryName);
         categoryRepo.save(category);
         return ResponseEntity.ok(category);
+    }
+
+    public ResponseEntity<Object> addCategory(String categoryName) {
+        if(categoryRepo.findByName(categoryName).isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        Categories category = new Categories();
+        category.setName(categoryName);
+        categoryRepo.save(category);
+        return ResponseEntity.ok(category);
+    }
+    public ResponseEntity<Object> deleteCategory(int id) {
+        if(categoryRepo.findById(id).isPresent()){
+            categoryRepo.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+    public ResponseEntity<Object> updateCategory(int id, String categoryName) {
+        if(categoryRepo.findById(id).isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        Categories category = categoryRepo.findById(id).get();
+        category.setName(categoryName);
+        categoryRepo.save(category);
+        return ResponseEntity.ok(category);
+    }
+
+    public ResponseEntity<Categories> findById(int id){
+        if(categoryRepo.findById(id).isPresent()){
+            return ResponseEntity.ok(categoryRepo.findById(id).get());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }

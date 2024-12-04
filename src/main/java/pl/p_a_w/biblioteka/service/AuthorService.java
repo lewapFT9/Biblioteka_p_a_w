@@ -55,4 +55,33 @@ public class AuthorService {
         authorRepo.save(author);
         return ResponseEntity.ok(author);
     }
+
+    public ResponseEntity<Object> deleteAuthorById(int id) {
+        if(authorRepo.findById(id).isPresent()) {
+            authorRepo.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+    public ResponseEntity<Authors> updateAuthor(int id, Authors updateData) {
+        if(authorRepo.findById(id).isPresent()) {
+            Authors author = authorRepo.findById(id).get();
+            if(updateData.getName() != null) {
+                author.setName(updateData.getName());
+            }
+            if(updateData.getSurname() != null) {
+                author.setSurname(updateData.getSurname());
+            }
+            authorRepo.save(author);
+            return ResponseEntity.ok(author);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    public ResponseEntity<Object> addAuthor(Authors author) {
+        if(authorRepo.findByNameAndSurname(author.getName(),author.getSurname()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        authorRepo.save(author);
+        return ResponseEntity.ok().build();
+    }
 }

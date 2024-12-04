@@ -9,6 +9,7 @@ import pl.p_a_w.biblioteka.dto.BookDTO;
 import pl.p_a_w.biblioteka.dto.BookDTO2;
 import pl.p_a_w.biblioteka.model.Authors;
 import pl.p_a_w.biblioteka.model.Books;
+import pl.p_a_w.biblioteka.model.Categories;
 import pl.p_a_w.biblioteka.repo.AuthorRepo;
 import pl.p_a_w.biblioteka.repo.BooksRepo;
 
@@ -75,6 +76,45 @@ public class BooksService {
         book.setIdAuthor(authorService.returnAuthorToAddBook(bookDTO.getAuthorName(), bookDTO.getAuthorSurname()).getBody());
         book.setIdCategory(categoryService.returnCategoryToAddBook(bookDTO.getCategory()).getBody());
         return ResponseEntity.ok(booksRepo.save(book));
+    }
+
+    public ResponseEntity<Object> deleteBook(int id) {
+        if(booksRepo.findById(id).isPresent()) {
+            Books book = booksRepo.findById(id).get();
+            booksRepo.delete(book);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+
+
+    public ResponseEntity<Object> updateBook(int id, BookDTO2 updateData) {
+        if(booksRepo.findById(id).isPresent()) {
+            Books bookToUpdate = booksRepo.findById(id).get();
+            if(updateData.getTitle() != null) {
+                bookToUpdate.setTitle(updateData.getTitle());
+            }
+            if(updateData.getAuthorName() != null || updateData.getAuthorSurname() != null) {
+                Authors author = authorService.returnAuthorToAddBook(updateData.getAuthorName(), updateData.getAuthorSurname()).getBody();
+                bookToUpdate.setIdAuthor(author);
+            }
+            if(updateData.getCategory() != null) {
+                Categories category = categoryService.returnCategoryToAddBook(updateData.getCategory()).getBody();
+                bookToUpdate.setIdCategory(category);
+            }
+            if(updateData.getNumberOfCopies() != null) {
+                if(updateData.getNumberOfCopies() >= 0) {
+                    bookToUpdate.setNumberOfCopies(updateData.getNumberOfCopies());
+                }
+            }
+            if(updateData.getYearOfRelease() != null) {
+                bookToUpdate.setReleaseYear(updateData.getYearOfRelease());
+            }
+            booksRepo.save(bookToUpdate);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 

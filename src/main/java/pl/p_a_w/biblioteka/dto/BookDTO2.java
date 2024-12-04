@@ -3,9 +3,10 @@ package pl.p_a_w.biblioteka.dto;
 public class BookDTO2 {
     private String title;
     private String category;
-    private int yearOfRelease;
-    private int numberOfCopies;
+    private Integer yearOfRelease;
+    private Integer numberOfCopies;
     private String authorName;
+    private String authorSurname;
 
     public String getTitle() {
         return title;
@@ -23,19 +24,19 @@ public class BookDTO2 {
         this.category = category;
     }
 
-    public int getYearOfRelease() {
+    public Integer getYearOfRelease() {
         return yearOfRelease;
     }
 
-    public void setYearOfRelease(int yearOfRelease) {
+    public void setYearOfRelease(Integer yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
     }
 
-    public int getNumberOfCopies() {
+    public Integer getNumberOfCopies() {
         return numberOfCopies;
     }
 
-    public void setNumberOfCopies(int numberOfCopies) {
+    public void setNumberOfCopies(Integer numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
     }
 
@@ -54,8 +55,6 @@ public class BookDTO2 {
     public void setAuthorSurname(String authorSurname) {
         this.authorSurname = authorSurname;
     }
-
-    private String authorSurname;
 
     public BookDTO2(String title, String category, int yearOfRelease, int numberOfCopies, String authorName, String authorSurname) {
         this.title = title;

@@ -38,12 +38,28 @@ public class BooksController {
         return booksService.getBooksByAuthor(getAuthor);
     }
 
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
-    @PostMapping("/savebook")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/admin/savebook")
     public ResponseEntity<Books> booksSave(@RequestBody BookDTO2 bookToSave) {
         return booksService.addBook(bookToSave);
     }
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/admin/allbooks")
+    public ResponseEntity<Object> seeAllBooks() {
+        return booksService.getBooks();
+    }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("/admin/deletebook/{id}")
+    public ResponseEntity<Object> deleteBook(@PathVariable int id) {
+        return booksService.deleteBook(id);
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PatchMapping ("/admin/updatebook/{id}")
+    public ResponseEntity<Object> updateBook(@PathVariable int id, @RequestBody BookDTO2 updateData) {
+        return booksService.updateBook(id, updateData);
+    }
 
 }
 
