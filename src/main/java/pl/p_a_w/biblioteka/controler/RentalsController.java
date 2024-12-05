@@ -3,11 +3,14 @@ package pl.p_a_w.biblioteka.controler;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.p_a_w.biblioteka.model.Rents;
 import pl.p_a_w.biblioteka.service.RentalService;
+
+import java.util.List;
 
 @RestController
 public class RentalsController {
@@ -22,5 +25,17 @@ public class RentalsController {
     @PostMapping("/books/{id}/rent")
     public ResponseEntity<Rents> rentBook(@PathVariable int id) {
         return rentalService.rentBook(id);
+    }
+
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @GetMapping("/user/rents")
+    public ResponseEntity<Object> getRents() {
+        return ResponseEntity.ok(rentalService.UserRents());
+    }
+
+    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @PostMapping("/user/rents/{id}")
+    public ResponseEntity<Rents> returnBook(@PathVariable int id) {
+        return rentalService.returnBook(id);
     }
 }
