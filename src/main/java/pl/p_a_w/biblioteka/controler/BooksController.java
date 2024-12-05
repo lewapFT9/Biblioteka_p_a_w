@@ -27,7 +27,7 @@ public class BooksController {
     @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("books/{id}")
     public ResponseEntity<Object> book(@PathVariable Integer id) {
-        return booksService.getBook(id);
+        return booksService.getBookToDisplay(id);
     }
 
     @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")

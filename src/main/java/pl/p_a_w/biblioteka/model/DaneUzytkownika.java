@@ -1,13 +1,17 @@
 package pl.p_a_w.biblioteka.model;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class DaneUzytkownika implements UserDetails {
 
@@ -55,4 +59,6 @@ public class DaneUzytkownika implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
+

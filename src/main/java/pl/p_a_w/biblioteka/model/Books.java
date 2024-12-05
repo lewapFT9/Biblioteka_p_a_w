@@ -40,7 +40,7 @@ public class Books {
     @Column(name = "numberOfCopies")
     private Integer numberOfCopies;
 
-    @OneToMany(mappedBy = "idBook")
+    @OneToMany(mappedBy = "idBook", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Rents> rentalsS = new LinkedHashSet<>();
 

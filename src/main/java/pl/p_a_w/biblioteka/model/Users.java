@@ -41,7 +41,7 @@ public class Users {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @OneToMany(mappedBy = "idUser")
+    @OneToMany(mappedBy = "idUser",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Rents> rentalsS = new LinkedHashSet<>();
 

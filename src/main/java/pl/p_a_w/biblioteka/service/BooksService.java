@@ -38,7 +38,7 @@ public class BooksService {
         return ResponseEntity.ok(booksRepo.findAll());
     }
 
-    public ResponseEntity<Object> getBook(int id) {
+    public ResponseEntity<Object> getBookToDisplay(int id) {
         if(booksRepo.findById(id).isPresent()) {
             Books book = booksRepo.findById(id).get();
             BookDTO bookDTO = new BookDTO(book.getId(),book.getTitle(),
@@ -48,6 +48,14 @@ public class BooksService {
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    public ResponseEntity<Books> getBookById(int id) {
+        if(booksRepo.findById(id).isPresent()) {
+            Books book = booksRepo.findById(id).get();
+            return ResponseEntity.ok(book);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     public ResponseEntity<Object> getBooksByAuthor(String author) {
