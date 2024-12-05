@@ -24,7 +24,7 @@ public class Authors {
     @Column(name = "surname", nullable = false, length = 200)
     private String surname;
 
-    @OneToMany(mappedBy = "idAuthor")
+    @OneToMany(mappedBy = "idAuthor",cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Books> booksS = new LinkedHashSet<>();
 

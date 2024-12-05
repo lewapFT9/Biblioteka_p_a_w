@@ -4,7 +4,6 @@ package pl.p_a_w.biblioteka.controler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.p_a_w.biblioteka.dto.BookDTO;
 import pl.p_a_w.biblioteka.dto.BookDTO2;
 import pl.p_a_w.biblioteka.model.Books;
 import pl.p_a_w.biblioteka.service.BooksService;

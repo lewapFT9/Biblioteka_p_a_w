@@ -21,7 +21,7 @@ public class Categories {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @OneToMany(mappedBy = "idCategory")
+    @OneToMany(mappedBy = "idCategory", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Books> booksS = new LinkedHashSet<>();
 

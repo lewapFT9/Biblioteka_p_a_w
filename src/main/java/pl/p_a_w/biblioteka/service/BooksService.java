@@ -15,7 +15,6 @@ import pl.p_a_w.biblioteka.repo.BooksRepo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class BooksService {
@@ -92,6 +91,7 @@ public class BooksService {
     public ResponseEntity<Object> updateBook(int id, BookDTO2 updateData) {
         if(booksRepo.findById(id).isPresent()) {
             Books bookToUpdate = booksRepo.findById(id).get();
+            System.out.println(bookToUpdate.getTitle()+" "+ bookToUpdate.getReleaseYear()+" "+bookToUpdate.getNumberOfCopies());
             if(updateData.getTitle() != null) {
                 bookToUpdate.setTitle(updateData.getTitle());
             }
@@ -116,6 +116,4 @@ public class BooksService {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
-
 }

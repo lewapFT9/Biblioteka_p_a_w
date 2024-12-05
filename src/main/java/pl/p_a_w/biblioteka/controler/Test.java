@@ -1,6 +1,5 @@
 package pl.p_a_w.biblioteka.controler;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.p_a_w.biblioteka.model.Users;

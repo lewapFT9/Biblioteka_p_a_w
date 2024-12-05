@@ -1,12 +1,10 @@
 package pl.p_a_w.biblioteka.service;
 
 
-import jdk.jfr.Category;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.p_a_w.biblioteka.dto.BookDTO;
-import pl.p_a_w.biblioteka.model.Books;
 import pl.p_a_w.biblioteka.model.Categories;
 import pl.p_a_w.biblioteka.repo.BooksRepo;
 import pl.p_a_w.biblioteka.repo.CategoryRepo;
@@ -72,12 +70,12 @@ public class CategoryService {
     }
     public ResponseEntity<Object> updateCategory(int id, String categoryName) {
         if(categoryRepo.findById(id).isPresent()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            Categories category = categoryRepo.findById(id).get();
+            category.setName(categoryName);
+            categoryRepo.save(category);
+            return ResponseEntity.ok(category);
         }
-        Categories category = categoryRepo.findById(id).get();
-        category.setName(categoryName);
-        categoryRepo.save(category);
-        return ResponseEntity.ok(category);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     public ResponseEntity<Categories> findById(int id){
