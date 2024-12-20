@@ -25,6 +25,7 @@ import pl.p_a_w.biblioteka.service.CustomUserDetailsService;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+
 public class SecConfig {
     @Autowired
     CustomUserDetailsService userDetailsService;

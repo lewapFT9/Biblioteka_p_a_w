@@ -8,6 +8,7 @@ import pl.p_a_w.biblioteka.model.Authors;
 import pl.p_a_w.biblioteka.service.AuthorService;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class AuthorsController {
     final AuthorService authorService;
 

@@ -11,6 +11,7 @@ import pl.p_a_w.biblioteka.service.BooksService;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class BooksController {
     final BooksService booksService;
 
