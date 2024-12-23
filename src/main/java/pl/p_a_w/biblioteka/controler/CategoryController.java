@@ -8,7 +8,6 @@ import pl.p_a_w.biblioteka.service.CategoryService;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class CategoryController {
 
     final CategoryService categoryService;

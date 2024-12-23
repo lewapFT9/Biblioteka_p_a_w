@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import pl.p_a_w.biblioteka.dto.RentDTO;
 import pl.p_a_w.biblioteka.model.Books;
-import pl.p_a_w.biblioteka.model.DaneUzytkownika;
 import pl.p_a_w.biblioteka.model.Rents;
 import pl.p_a_w.biblioteka.model.Users;
 import pl.p_a_w.biblioteka.repo.BooksRepo;
@@ -14,6 +14,7 @@ import pl.p_a_w.biblioteka.repo.RentalsRepo;
 import pl.p_a_w.biblioteka.repo.UserRepo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,10 +51,16 @@ public class RentalService {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    public List<Rents> UserRents(){
+    public List<RentDTO> UserRents(){
         UserDetails userDetails = userService.getLoggedInUserDetails();
         Users user = userRepo.findByEmail(userDetails.getUsername());
-        return rentalsRepo.findByUserId(user.getId());
+        List<Rents> rents = rentalsRepo.findByUserId(user.getId());
+        List<RentDTO> returnList = new ArrayList<>();
+        for(Rents rent: rents){
+            RentDTO rentDTO = new RentDTO(rent.getId(), booksService.findTitleById(rent.getIdBook().getId()), rent.getRentDate(), rent.getReturnDate());
+            returnList.add(rentDTO);
+        }
+        return returnList;
     }
 
     public ResponseEntity<Rents> returnBook(int id){

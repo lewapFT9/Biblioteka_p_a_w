@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.p_a_w.biblioteka.model.Rents;
 import pl.p_a_w.biblioteka.service.RentalService;
 
-import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class RentalsController {
     final RentalService rentalService;
 

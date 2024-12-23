@@ -11,7 +11,6 @@ import pl.p_a_w.biblioteka.service.BooksService;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class BooksController {
     final BooksService booksService;
 
@@ -26,7 +25,7 @@ public class BooksController {
     }
 
     @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
-    @GetMapping("books/{id}")
+    @GetMapping("/books/{id}")
     public ResponseEntity<Object> book(@PathVariable Integer id) {
         return booksService.getBookToDisplay(id);
     }

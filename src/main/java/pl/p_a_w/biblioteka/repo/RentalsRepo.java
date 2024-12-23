@@ -2,10 +2,8 @@ package pl.p_a_w.biblioteka.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import pl.p_a_w.biblioteka.model.Rents;
-import pl.p_a_w.biblioteka.model.Users;
 
 import java.util.List;
 

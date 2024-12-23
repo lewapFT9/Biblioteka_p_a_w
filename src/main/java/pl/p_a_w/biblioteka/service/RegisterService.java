@@ -44,18 +44,15 @@ public class RegisterService {
         try {
             uzytkownik.setPassword(passwordEncoder.encode(uzytkownik.getPassword()));
             uzytkownik.setRole("USER");
-            if (uzytkownik.getId() > 0) {
-                uRepo.save(uzytkownik);
-                return ResponseEntity.status(200).body("Successfully registered!");
-            }
+            uRepo.save(uzytkownik);
+            return ResponseEntity.ok().body("{\"message\":\"Successfully registered!\"}");
         } catch (DataIntegrityViolationException e) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Data integrity violation", e);
-        } catch (ConstraintViolationException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Validation error", e);
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("{\"error\":\"Data integrity violation\"}");
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"error\":\"Unexpected error\"}");
         }
-        return ResponseEntity.ok("User not saved");
     }
 
     public ResponseEntity<String> registerAdmin(Users uzytkownik) {

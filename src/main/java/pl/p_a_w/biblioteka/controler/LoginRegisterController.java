@@ -11,7 +11,6 @@ import pl.p_a_w.biblioteka.service.RegisterService;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 public class LoginRegisterController {
 
 

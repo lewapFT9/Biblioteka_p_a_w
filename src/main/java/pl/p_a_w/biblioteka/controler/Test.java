@@ -10,23 +10,14 @@ import java.util.List;
 @RestController
 public class Test {
     final UserRepo userRepo;
+
     public Test(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
-//    @PreAuthorize("hasAuthority('USER')")
-@GetMapping("/test")
-public List<Users> home() {
-    return userRepo.findAll();
-}
-
-//    //@PreAuthorize("hasAuthority('USER')")
-//    @GetMapping("/test")
-//    public List<Uzytkownicy> test() {
-//        return userRepo.findAll();
-//    }
-////    @RequestMapping("/error")
-////    public String error() {
-////        return "no i w pizdu i wylądował i cały misterny plan też w pizdu";
-////    }
+    //    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("/test")
+    public List<Users> home() {
+        return userRepo.findAll();
+    }
 }

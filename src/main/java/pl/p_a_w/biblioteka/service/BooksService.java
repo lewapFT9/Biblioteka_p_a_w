@@ -73,6 +73,14 @@ public class BooksService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    public String findTitleById(int id) {
+        if(booksRepo.findById(id).isPresent()) {
+            Books book = booksRepo.findById(id).get();
+            return book.getTitle();
+        }
+        return HttpStatus.NOT_FOUND.getReasonPhrase();
+    }
+
     public ResponseEntity<Books> addBook(@Valid BookDTO2 dto) {
         BookDTO2 bookDTO =new BookDTO2(dto.getTitle(),dto.getCategory(),
                 dto.getYearOfRelease(), dto.getNumberOfCopies(), dto.getAuthorName(), dto.getAuthorSurname());
