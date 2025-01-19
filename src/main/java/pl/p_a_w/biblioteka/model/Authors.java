@@ -2,14 +2,11 @@ package pl.p_a_w.biblioteka.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "Authors", schema = "railway")
 public class Authors {
@@ -28,4 +25,35 @@ public class Authors {
     @JsonIgnore
     private Set<Books> booksS = new LinkedHashSet<>();
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Set<Books> getBooksS() {
+        return booksS;
+    }
+
+    public void setBooksS(Set<Books> booksS) {
+        this.booksS = booksS;
+    }
 }

@@ -2,14 +2,11 @@ package pl.p_a_w.biblioteka.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "Categories", schema = "railway")
 public class Categories {
@@ -17,6 +14,30 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id", nullable = false)
     private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Books> getBooksS() {
+        return booksS;
+    }
+
+    public void setBooksS(Set<Books> booksS) {
+        this.booksS = booksS;
+    }
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;

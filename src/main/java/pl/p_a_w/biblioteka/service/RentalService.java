@@ -5,13 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import pl.p_a_w.biblioteka.dto.RentDTO;
 import pl.p_a_w.biblioteka.model.Books;
 import pl.p_a_w.biblioteka.model.Rents;
 import pl.p_a_w.biblioteka.model.Users;
 import pl.p_a_w.biblioteka.repo.BooksRepo;
 import pl.p_a_w.biblioteka.repo.RentalsRepo;
 import pl.p_a_w.biblioteka.repo.UserRepo;
+import pl.p_a_w.biblioteka.dto.RentDTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

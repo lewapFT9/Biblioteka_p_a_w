@@ -2,13 +2,11 @@ package pl.p_a_w.biblioteka.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "Rentals", schema = "railway")
 public class Rents {
@@ -33,4 +31,43 @@ public class Rents {
     @Column(name = "returnDate")
     private LocalDate returnDate;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Users getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Users idUser) {
+        this.idUser = idUser;
+    }
+
+    public Books getIdBook() {
+        return idBook;
+    }
+
+    public void setIdBook(Books idBook) {
+        this.idBook = idBook;
+    }
+
+    public LocalDate getRentDate() {
+        return rentDate;
+    }
+
+    public void setRentDate(LocalDate rentDate) {
+        this.rentDate = rentDate;
+    }
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
 }

@@ -3,15 +3,12 @@ package pl.p_a_w.biblioteka.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "Books", schema = "railway")
 public class Books {
@@ -44,4 +41,59 @@ public class Books {
     @JsonIgnore
     private Set<Rents> rentalsS = new LinkedHashSet<>();
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Integer getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public Authors getIdAuthor() {
+        return idAuthor;
+    }
+
+    public void setIdAuthor(Authors idAuthor) {
+        this.idAuthor = idAuthor;
+    }
+
+    public Categories getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(Categories idCategory) {
+        this.idCategory = idCategory;
+    }
+
+    public Integer getNumberOfCopies() {
+        return numberOfCopies;
+    }
+
+    public void setNumberOfCopies(Integer numberOfCopies) {
+        this.numberOfCopies = numberOfCopies;
+    }
+
+    public Set<Rents> getRentalsS() {
+        return rentalsS;
+    }
+
+    public void setRentalsS(Set<Rents> rentalsS) {
+        this.rentalsS = rentalsS;
+    }
 }
